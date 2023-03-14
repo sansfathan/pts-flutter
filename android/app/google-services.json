@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "802303662847",
+    "project_id": "crud-mahasiswa-98a7f",
+    "storage_bucket": "crud-mahasiswa-98a7f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:802303662847:android:d2865a390807ac9e4f4aca",
+        "android_client_info": {
+          "package_name": "leeJihon.uts_flutter"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "802303662847-c9jnv2hkjtij2mtrfg67l4e8egpv0u1m.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDf0VxORPQgFwSNgCy3r3M-VDvM8uq6-UA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "802303662847-c9jnv2hkjtij2mtrfg67l4e8egpv0u1m.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
