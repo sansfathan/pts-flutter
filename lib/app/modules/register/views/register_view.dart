@@ -203,8 +203,8 @@ class RegisterView extends GetView<RegisterController> {
                           child: ElevatedButton(
                               style: ElevatedButton.styleFrom(
                                   backgroundColor: siPutih),
-                              // onPressed: () => authC.signInWithGoogle(),
-                              onPressed: () {},
+                              onPressed: () => authC.signInWithGoogle(),
+                              // onPressed: () {},
                               child: Row(
                                 // crossAxisAlignment: CrossAxisAlignment.center,
                                 mainAxisAlignment: MainAxisAlignment.center,

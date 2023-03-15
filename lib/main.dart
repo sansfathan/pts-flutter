@@ -29,9 +29,7 @@ class MyApp extends StatelessWidget {
             return GetMaterialApp(
               debugShowCheckedModeBanner: false,
               title: "Application",
-              initialRoute: snapshot.data != null
-                  ? Routes.HOME
-                  : Routes.LOGIN,
+              initialRoute: snapshot.data != null ? Routes.HOME : Routes.LOGIN,
               getPages: AppPages.routes,
             );
           } else {

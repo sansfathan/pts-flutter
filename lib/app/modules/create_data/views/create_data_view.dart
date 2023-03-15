@@ -9,8 +9,18 @@ import 'package:uts_flutter/app/modules/detail_mahasiswa/controllers/detail_maha
 
 import '../controllers/create_data_controller.dart';
 
+class Tanggal extends GetxController {
+  var selectedDate = DateTime.now().obs;
+
+  void onDateSelected(DateTime newDate) {
+    selectedDate.value = newDate;
+  }
+}
+
 class CreateDataView extends GetView<CreateDataController> {
-  DateTime date = DateTime.now();
+  // DateTime date = DateTime.now();
+  final tanggal = Get.put(Tanggal());
+  final TextEditingController ttl = TextEditingController();
   final mahasiswaC = Get.put(MahasiswaController());
   final createC = Get.put(CreateDataController());
   @override
@@ -50,23 +60,83 @@ class CreateDataView extends GetView<CreateDataController> {
                       margin: EdgeInsets.only(bottom: 10),
                       child: CustomInput(
                           controller: controller.tempatLahir,
-                          label: 'nama tempat Lahir ',
+                          label: 'tempat Lahir ',
                           hint: 'Masukkan tempat lahir',
                           obscure: false),
                     ),
                     Container(
                       margin: EdgeInsets.only(bottom: 10),
-                      child: CustomInput(
-                          controller: controller.tanggalLahir,
-                          label: 'nama tanggal Lahir ',
-                          hint: 'Masukkan tanggal lahir',
-                          obscure: false),
+                      child: Column(
+                        children: [
+                          Container(
+                            margin: EdgeInsets.only(bottom: 5),
+                            child: Align(
+                              alignment: Alignment.centerLeft,
+                              child: Text("Date of Birth",
+                                  style: TextStyle(
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.w500)),
+                            ),
+                          ),
+                          TextFormField(
+                            controller: ttl,
+                            obscureText: false,
+                            decoration: InputDecoration(
+                              labelStyle: const TextStyle(
+                                fontFamily: "Poppins",
+                                color: Colors.black,
+                                fontSize: 19,
+                              ),
+                              hintText: "Date of Birth",
+                              hintStyle: TextStyle(
+                                  fontFamily: "Poppins",
+                                  color: bgColeb1,
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w400),
+                              floatingLabelBehavior:
+                                  FloatingLabelBehavior.always,
+                              contentPadding: const EdgeInsets.symmetric(
+                                horizontal: 20,
+                                vertical: 18,
+                              ),
+                              enabledBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(6),
+                                borderSide:
+                                    BorderSide(color: siIreng, width: 1),
+                                gapPadding: 5,
+                              ),
+                              focusedBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(6),
+                                borderSide: const BorderSide(
+                                    color: Color.fromARGB(255, 27, 27, 27),
+                                    width: 1),
+                                gapPadding: 5,
+                              ),
+                            ),
+                            readOnly: true,
+                            onTap: () {
+                              showDatePicker(
+                                context: context,
+                                initialDate: tanggal.selectedDate.value,
+                                firstDate: DateTime(1980),
+                                lastDate: DateTime(2030),
+                              ).then((newDate) {
+                                if (newDate != null) {
+                                  tanggal.onDateSelected(newDate);
+                                  ttl.text =
+                                      tanggal.selectedDate.value.toString();
+                                }
+                              });
+                            },
+                          ),
+                        ],
+                      ),
                     ),
                     Container(
                       margin: EdgeInsets.only(bottom: 10),
                       child: CustomInput(
                           controller: controller.alamat,
-                          label: 'nama alamat ',
+                          label: 'alamat ',
                           hint: 'Masukkan alamat',
                           obscure: false),
                     ),
@@ -74,7 +144,7 @@ class CreateDataView extends GetView<CreateDataController> {
                       margin: EdgeInsets.only(bottom: 10),
                       child: CustomInput(
                           controller: controller.nim,
-                          label: 'nama nim ',
+                          label: 'nim ',
                           hint: 'Masukkan nim',
                           obscure: false),
                     ),

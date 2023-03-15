@@ -45,8 +45,8 @@ class MahasiswaController extends GetxController {
     }
   }
 
-  updateData(String alamat, String fotoSiswa, String namaSiswa, int nim,
-      String tanggalLahir, String tempatLahir) async {
+  updateData(String id, String alamat, String fotoSiswa, String namaSiswa,
+      int nim, String tanggalLahir, String tempatLahir) async {
     final mahasiswaData = {
       "alamat": alamat,
       "fotoSiswa": fotoSiswa,
@@ -57,10 +57,10 @@ class MahasiswaController extends GetxController {
     };
     try {
       DocumentReference mahaSiswa =
-          firestore.collection('crud-mahasiswa').doc(namaSiswa);
+          firestore.collection('crud-mahasiswa').doc(id);
       await mahaSiswa.update(mahasiswaData);
 
-      Get.defaultDialog(title: 'Alert', middleText: 'berhasil menupdate data');
+      Get.defaultDialog(title: 'Alert', middleText: '😊 berhasil menupdate data 😊');
       Get.offNamed(Routes.HOME);
       log("👉👉👉👉👉👉👉👉");
       print(mahasiswaData);
@@ -74,13 +74,14 @@ class MahasiswaController extends GetxController {
   deleteData(String id) async {
     try {
       DocumentReference Slider = firestore.collection('crud-mahasiswa').doc(id);
-      await Slider.delete();
+
       Get.defaultDialog(
           title: "yakin Delete ?",
           middleText: "😱😱😱",
           confirm: ElevatedButton(
             style: ElevatedButton.styleFrom(backgroundColor: bgRed),
             onPressed: () async {
+              await Slider.delete();
               // await FirebaseAuth.instance.delete();
               Get.offAndToNamed(Routes.HOME);
               print("berhasil Delete");

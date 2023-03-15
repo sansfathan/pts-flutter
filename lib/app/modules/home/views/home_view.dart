@@ -24,14 +24,18 @@ class HomeView extends GetView<HomeController> {
           title: Text("Data Mahasiswa"),
           centerTitle: true,
           backgroundColor: siIreng,
-          leading: GestureDetector(
+          actions: [
+            Container(
+              margin: EdgeInsets.only(right: 10),
               child: InkWell(
-            onTap: () => authC.logOut(),
-            child: Icon(
-              Icons.logout_outlined,
-              color: siPutih,
-            ),
-          )),
+                onTap: () => authC.logOut(),
+                child: Icon(
+                  Icons.logout_outlined,
+                  color: siPutih,
+                ),
+              ),
+            )
+          ],
         ),
         body: SingleChildScrollView(
           child: Column(
@@ -100,162 +104,172 @@ Widget dataMahaSiswa(
   final mahaC = Get.put(MahasiswaController());
   return InkWell(
     onTap: () => Get.toNamed(Routes.DETAIL_MAHASISWA, arguments: arguments),
-    child: Container(
-      margin: EdgeInsets.only(top: 10, left: 8, right: 8),
-      width: 700,
-      height: 170,
-      decoration: BoxDecoration(
-          color: Colors.amber, borderRadius: BorderRadius.circular(10)),
-      // decoration: BoxDecoration(color: Colors.red),
-      child: Row(children: [
-        Container(
-          margin: EdgeInsets.only(left: 10, right: 10),
-          width: 130,
-          height: 130,
-          decoration: BoxDecoration(borderRadius: BorderRadius.circular(10)),
-          child: Image.network(foto
-              // fit: BoxFit.cover,
-              ),
-        ),
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Row(
+    child: SingleChildScrollView(
+      child: Container(
+        margin: EdgeInsets.only(top: 10, left: 8, right: 8),
+        width: 540,
+        height: 175,
+        decoration: BoxDecoration(
+            border: Border.all(color: siIreng),
+            borderRadius: BorderRadius.circular(10)),
+        // decoration: BoxDecoration(color: Colors.red),
+        child: Row(children: [
+          Container(
+            margin: EdgeInsets.only(left: 10, right: 10),
+            width: 100,
+            height: 110,
+            decoration: BoxDecoration(borderRadius: BorderRadius.circular(10)),
+            child: Image.network(
+              foto,
+              fit: BoxFit.cover,
+            ),
+          ),
+          Container(
+            margin: EdgeInsets.only(top: 10),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                Row(
+                  children: [
+                    Container(
+                      margin: EdgeInsets.only(top: 0),
+                      child: Text(
+                        "Name :",
+                        style: TextStyle(color: siIreng),
+                      ),
+                    ),
+                    Container(
+                      margin: EdgeInsets.only(top: 0, left: 5),
+                      child: Text(
+                        nama,
+                        style: TextStyle(fontSize: 14, color: siIreng),
+                      ),
+                    ),
+                  ],
+                ),
                 Container(
-                  margin: EdgeInsets.only(top: 10),
-                  child: Text(
-                    "Name :",
-                    style: TextStyle(color: siPutih),
+                  child: Row(
+                    children: [
+                      Container(
+                        margin: EdgeInsets.only(top: 0),
+                        child: Text(
+                          "Tempat / Tanggal Lahir :",
+                          style: TextStyle(color: siIreng),
+                        ),
+                      ),
+                      Container(
+                        margin: EdgeInsets.only(top: 0, left: 5),
+                        child: Text(
+                          TtLahir,
+                          style: TextStyle(fontSize: 12, color: siIreng),
+                        ),
+                      ),
+                      Container(
+                        margin: EdgeInsets.only(top: 0, left: 5),
+                        child: Text(
+                          TtLahir2,
+                          style: TextStyle(fontSize: 12, color: siIreng),
+                        ),
+                      ),
+                    ],
                   ),
                 ),
                 Container(
-                  margin: EdgeInsets.only(top: 10, left: 5),
-                  child: Text(
-                    nama,
-                    style: TextStyle(fontSize: 16, color: siPutih),
+                  child: Row(
+                    children: [
+                      Container(
+                        margin: EdgeInsets.only(top: 0),
+                        child: Text(
+                          "Alamat :",
+                          style: TextStyle(color: siIreng),
+                        ),
+                      ),
+                      Container(
+                        margin: EdgeInsets.only(top: 0, left: 5),
+                        child: Text(
+                          alamat,
+                          style: TextStyle(fontSize: 14, color: siIreng),
+                        ),
+                      ),
+                    ],
                   ),
                 ),
+                Container(
+                  child: Row(
+                    children: [
+                      Container(
+                        margin: EdgeInsets.only(top: 0),
+                        child: Text(
+                          "Nim :",
+                          style: TextStyle(color: siIreng),
+                        ),
+                      ),
+                      Container(
+                        margin: EdgeInsets.only(top: 0, left: 5),
+                        child: Text(
+                          nim.toString(),
+                          style: TextStyle(fontSize: 14, color: siPutih),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                Container(
+                  margin: EdgeInsets.only(top: 5, left: 165),
+                  child: Row(
+                    // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Container(
+                        child: ElevatedButton(
+                          onPressed: () => Get.toNamed(Routes.UPDATE_DATA,
+                              arguments: arguments),
+                          child: Text("Update"),
+                          style: ElevatedButton.styleFrom(
+                            primary:
+                                Colors.green, // warna latar belakang tombol
+                            textStyle: TextStyle(
+                              fontSize: 15, // ukuran teks pada tombol
+                              fontWeight:
+                                  FontWeight.bold, // tebal teks pada tombol
+                            ),
+                            padding: EdgeInsets.symmetric(
+                                vertical: 5, horizontal: 10), // padding tombol
+                            shape: RoundedRectangleBorder(
+                              borderRadius:
+                                  BorderRadius.circular(10), // bentuk tombol
+                            ),
+                          ),
+                        ),
+                      ),
+                      Container(
+                        margin: EdgeInsets.only(left: 5),
+                        child: ElevatedButton(
+                          onPressed: () => mahaC.deleteData(delete),
+                          child: Text("Delete"),
+                          style: ElevatedButton.styleFrom(
+                            primary: Colors.red, // warna latar belakang tombol
+                            textStyle: TextStyle(
+                              fontSize: 15, // ukuran teks pada tombol
+                              fontWeight:
+                                  FontWeight.bold, // tebal teks pada tombol
+                            ),
+                            padding: EdgeInsets.symmetric(
+                                vertical: 5, horizontal: 10), // padding tombol
+                            shape: RoundedRectangleBorder(
+                              borderRadius:
+                                  BorderRadius.circular(10), // bentuk tombol
+                            ),
+                          ),
+                        ),
+                      )
+                    ],
+                  ),
+                )
               ],
             ),
-            Container(
-              child: Row(
-                children: [
-                  Container(
-                    margin: EdgeInsets.only(top: 10),
-                    child: Text(
-                      "Tempat / Tanggal Lahir :",
-                      style: TextStyle(color: siPutih),
-                    ),
-                  ),
-                  Container(
-                    margin: EdgeInsets.only(top: 10, left: 5),
-                    child: Text(
-                      TtLahir,
-                      style: TextStyle(fontSize: 12, color: siPutih),
-                    ),
-                  ),
-                  Container(
-                    margin: EdgeInsets.only(top: 10, left: 5),
-                    child: Text(
-                      TtLahir2,
-                      style: TextStyle(fontSize: 12, color: siPutih),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            Container(
-              child: Row(
-                children: [
-                  Container(
-                    margin: EdgeInsets.only(top: 10),
-                    child: Text(
-                      "Alamat :",
-                      style: TextStyle(color: siPutih),
-                    ),
-                  ),
-                  Container(
-                    margin: EdgeInsets.only(top: 10, left: 5),
-                    child: Text(
-                      alamat,
-                      style: TextStyle(fontSize: 14, color: siPutih),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            Container(
-              child: Row(
-                children: [
-                  Container(
-                    margin: EdgeInsets.only(top: 10),
-                    child: Text(
-                      "Nim :",
-                      style: TextStyle(color: siPutih),
-                    ),
-                  ),
-                  Container(
-                    margin: EdgeInsets.only(top: 10, left: 5),
-                    child: Text(
-                      nim.toString(),
-                      style: TextStyle(fontSize: 14, color: siPutih),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            Container(
-              margin: EdgeInsets.only(top: 5, left: 165),
-              child: Row(
-                // mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Container(
-                    child: ElevatedButton(
-                      onPressed: () =>
-                          Get.toNamed(Routes.UPDATE_DATA, arguments: arguments),
-                      child: Text("Update"),
-                      style: ElevatedButton.styleFrom(
-                        primary: Colors.green, // warna latar belakang tombol
-                        textStyle: TextStyle(
-                          fontSize: 15, // ukuran teks pada tombol
-                          fontWeight: FontWeight.bold, // tebal teks pada tombol
-                        ),
-                        padding: EdgeInsets.symmetric(
-                            vertical: 5, horizontal: 10), // padding tombol
-                        shape: RoundedRectangleBorder(
-                          borderRadius:
-                              BorderRadius.circular(10), // bentuk tombol
-                        ),
-                      ),
-                    ),
-                  ),
-                  Container(
-                    margin: EdgeInsets.only(left: 5),
-                    child: ElevatedButton(
-                      onPressed: () => mahaC.deleteData(delete),
-                      child: Text("Delete"),
-                      style: ElevatedButton.styleFrom(
-                        primary: Colors.red, // warna latar belakang tombol
-                        textStyle: TextStyle(
-                          fontSize: 15, // ukuran teks pada tombol
-                          fontWeight: FontWeight.bold, // tebal teks pada tombol
-                        ),
-                        padding: EdgeInsets.symmetric(
-                            vertical: 5, horizontal: 10), // padding tombol
-                        shape: RoundedRectangleBorder(
-                          borderRadius:
-                              BorderRadius.circular(10), // bentuk tombol
-                        ),
-                      ),
-                    ),
-                  )
-                ],
-              ),
-            )
-          ],
-        )
-      ]),
+          )
+        ]),
+      ),
     ),
   );
 }

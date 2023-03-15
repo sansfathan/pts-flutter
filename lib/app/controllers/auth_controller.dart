@@ -56,7 +56,7 @@ class AuthController extends GetxController {
       print(e);
     }
   }
-  
+
   logOut() {
     Get.defaultDialog(
         title: "yakin Log Out?",
@@ -77,7 +77,6 @@ class AuthController extends GetxController {
         ));
   }
 
-  
   resetPassword(String email) async {
     try {
       final credential = await auth.sendPasswordResetEmail(email: email);
@@ -87,7 +86,7 @@ class AuthController extends GetxController {
       print(e);
     }
   }
-  
+
   Future<UserCredential> signInWithGoogle() async {
     // Trigger the authentication flow
     final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
@@ -106,5 +105,4 @@ class AuthController extends GetxController {
     Get.offAllNamed(Routes.HOME);
     return await FirebaseAuth.instance.signInWithCredential(credential);
   }
-
 }
